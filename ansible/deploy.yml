@@ -1,0 +1,20 @@
+---
+- name: Deploy TaskFlow to Kubernetes
+  hosts: local
+  gather_facts: false
+
+  tasks:
+    - name: Apply TaskFlow deployment
+      command: kubectl apply -f kubernetes/taskflow-deployment.yaml
+      args:
+        chdir: "{{ playbook_dir }}/.."
+
+    - name: Apply TaskFlow service
+      command: kubectl apply -f kubernetes/taskflow-service.yaml
+      args:
+        chdir: "{{ playbook_dir }}/.."
+
+    - name: Wait for TaskFlow deployment
+      command: kubectl rollout status deployment/taskflow --timeout=120s
+      args:
+        chdir: "{{ playbook_dir }}/.."
