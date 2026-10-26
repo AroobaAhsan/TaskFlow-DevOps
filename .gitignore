@@ -1,0 +1,13 @@
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Laravel
+/taskflow/vendor/
+/taskflow/node_modules/
+/taskflow/storage/*.key
+
+# Logs and temporary files
+*.log
+.DS_Store
